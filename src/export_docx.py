@@ -94,7 +94,8 @@ def export_exam_docx(meta: Dict[str, Any], questions: List[Dict[str, Any]]) -> b
             ans = ", ".join([f"{j+1}={'Đ' if it.get('answer') else 'S'}" for j, it in enumerate(tf)])
             _p(doc, f"Đáp án: {ans}")
         elif qt == "Nối cột":
-            _p(doc, f"Đáp án: {mt.get('answer', {})}" if (mt := content.get("matching", {})) else "Đáp án: {}")
+            mt = content.get("matching", {})
+            _p(doc, f"Đáp án: {mt.get('answer', {})}" if mt else "Đáp án: {}")
         elif qt == "Điền khuyết":
             _p(doc, f"Đáp án: {content.get('fill_blank', {}).get('answer','')}")
         else:
